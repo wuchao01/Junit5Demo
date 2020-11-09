@@ -1,6 +1,8 @@
+package com.junit5.demo;
+
 import org.junit.jupiter.api.*;
 
-public class Junit5Demo1 {
+public class Junit5Demo_3_1_Fixtures {
     @BeforeAll
     public static void beforeAll() {
         System.out.println("test beforeAll!");

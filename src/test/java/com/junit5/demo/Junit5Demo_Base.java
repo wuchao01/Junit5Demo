@@ -1,24 +1,20 @@
-import org.junit.Test;
+package com.junit5.demo;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
+import org.junit.jupiter.api.Test;
+import util.Calculator;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Junit5Demo {
-
+public class Junit5Demo_Base {
     @Test
-    public void addTest(){
-        int resultPass = Calculator.add(4,2);
-        int resultFail = Calculator.add(4,2);
+    public void addTest() {
         int result = Calculator.add(4,2);
         System.out.println("add:" + result);
-        assertAll(("计算结果："),
-        ()->assertEquals(6,resultPass),
-        ()->assertEquals(7,resultFail),
-        ()->assertEquals(8,result));
+        assertEquals(6,result);
     }
 
     @Test
-    public void subtractTest(){
+    public void subtractTest() throws InterruptedException {
         int result = Calculator.subtract(4,2);
         System.out.println("subtract" + result);
         assertEquals(2,result);
