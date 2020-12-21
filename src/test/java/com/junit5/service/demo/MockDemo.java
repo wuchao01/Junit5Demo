@@ -1,4 +1,4 @@
-package com.junit5.service;
+package com.junit5.service.demo;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.BeforeAll;

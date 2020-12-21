@@ -1,4 +1,4 @@
-package com.junit5.service;
+package com.junit5.service.demo;
 
 import io.netty.handler.codec.http.HttpResponse;
 import net.lightbody.bmp.BrowserMobProxy;

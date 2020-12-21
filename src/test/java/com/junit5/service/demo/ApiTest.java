@@ -1,10 +1,11 @@
-package com.junit5.service;
+package com.junit5.service.demo;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.useRelaxedHTTPSValidation;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class ApiTest {
@@ -13,6 +14,7 @@ public class ApiTest {
 
     @BeforeAll
     public static void loginTest(){
+        useRelaxedHTTPSValidation();
         cookie = given()
                 .contentType("application/x-www-form-urlencoded;charset=UTF-8")
                 .formParams("username","cwu","password","n2s_LZ39")
@@ -28,9 +30,9 @@ public class ApiTest {
 
     @Test
     public void getPromotionList(){
-        given()
+        given().proxy("localhost",8888)
                 .cookie(cookie)
-                .contentType("application/x-www-form-urlencoded")
+                .contentType("application/x-www-form-urlencoded;charset=UTF-8")
                 .formParam("parameter","{\"body\":{\"request\":{\"pageRequest\":{\"start\":0,\"limit\":10,\"results\":0,\"pageIndex\":1}}}}")
                 .when()
                 .post("https://eywa.today36524.com/api/com.today.api.promotion.service.PromotionService/1.0.0/listPromotions.html")
