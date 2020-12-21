@@ -5,15 +5,16 @@ import com.junit5.service.apiobject.TokenHelper;
 import com.junit5.service.utils.FakerUtils;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DepartmentTestCase {
-    private static String accessToken;
+    static String accessToken;
 
     @BeforeAll
     public static void getAccessToken(){
@@ -22,12 +23,12 @@ public class DepartmentTestCase {
 
     @DisplayName("创建部门")
     @Order(1)
+    @ParameterizedTest
     @CsvFileSource(resources = "/data/createDepartment.csv",numLinesToSkip = 1)
-    @Test
     public void createDepartment(String createName,String createEnName,String returnCode){
         //numLinesToSkip = 1代表略过第一条记录
         Response createResponse = DepartmentObject.createDepartment(createName,createEnName,accessToken);
-        assertEquals(returnCode,createResponse.path("errcode"));
+        assertEquals(returnCode,createResponse.path("errcode").toString());
     }
 
 //    @BeforeEach
@@ -67,9 +68,9 @@ public class DepartmentTestCase {
     @Order(3)
     @Test
     public void departmentList(){
-        String creatName= "name"+FakerUtils.getTimeStamp();
-        String creatEnName="en_name"+FakerUtils.getTimeStamp();
-        Response createResponse = DepartmentObject.createDepartment(creatName,creatEnName,accessToken);
+        String createName= "name"+FakerUtils.getTimeStamp();
+        String createEnName="en_name"+FakerUtils.getTimeStamp();
+        Response createResponse = DepartmentObject.createDepartment(createName,createEnName,accessToken);
         String departmentId = createResponse.path("id")!=null ? createResponse.path("id").toString(): null;
         Response listResponse = DepartmentObject.departmentList(departmentId,accessToken);
         assertEquals("1",listResponse.path("errcode").toString());

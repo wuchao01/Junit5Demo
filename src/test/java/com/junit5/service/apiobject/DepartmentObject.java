@@ -1,8 +1,8 @@
 package com.junit5.service.apiobject;
 
 import com.junit5.service.utils.FakerUtils;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+
 import static io.restassured.RestAssured.given;
 
 public class DepartmentObject {
@@ -28,12 +28,11 @@ public class DepartmentObject {
     public static Response createDepartment(String departmentName, String departmentEnName, String accessToken){
         Response creatResponse = given()
                 .proxy(8888)
-                .contentType("application/json; charset=UTF-8")
+                .contentType("application/json")
                 .body("{\n" +
                         "   \"name\": \"" + departmentName + "\",\n" +
                         "   \"name_en\": \"" + departmentEnName + "\",\n" +
-                        "   \"parentid\": " + 1 + ",\n" +
-                        "}")
+                        "   \"parentid\": 1}")
                 .queryParam("access_token", accessToken)
                 .post("https://qyapi.weixin.qq.com/cgi-bin/department/create")
                 .then()
@@ -53,14 +52,14 @@ public class DepartmentObject {
     public static Response updateDepartment(String departmentName, String departmentEnName, String parentId, String accessToken) {
         Response updateResponse = given()
                 .proxy(8888)
-                .contentType("application/json; charset=UTF-8")
+                .contentType("application/json")
                 .body("{\n" +
+                        "   \"id\": " + parentId + ",\n" +
                         "   \"name\": \"" + departmentName + "\",\n" +
                         "   \"name_en\": \"" + departmentEnName + "\",\n" +
-                        "   \"parentid\": " + parentId + ",\n" +
                         "}")
                 .queryParam("access_token", accessToken)
-                .post("https://qyapi.weixin.qq.com/cgi-bin/Department/update")
+                .post("https://qyapi.weixin.qq.com/cgi-bin/department/update")
                 .then()
                 .log()
                 .all()
@@ -80,7 +79,7 @@ public class DepartmentObject {
                         "   \"id\": " + parentId + ",\n" +
                         "}")
                 .queryParam("access_token", accessToken)
-                .get("https://qyapi.weixin.qq.com/cgi-bin/Department/delete")
+                .get("https://qyapi.weixin.qq.com/cgi-bin/department/delete")
                 .then()
                 .log()
                 .all()
@@ -98,7 +97,7 @@ public class DepartmentObject {
                 .proxy(8888)
                 .param("access_token", accessToken)
                 .param("id",parentId)
-                .get("https://qyapi.weixin.qq.com/cgi-bin/Department/list")
+                .get("https://qyapi.weixin.qq.com/cgi-bin/department/list")
                 .then()
                 .log()
                 .all()
