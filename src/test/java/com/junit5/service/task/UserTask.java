@@ -11,11 +11,10 @@ public class UserTask {
         Response response = UserObject.listUser("1",accessToken);
         ArrayList<String> userList = response.path("userlist.userid");
         for (String userId:userList){
-            if ("WuChao" == userId){
+            if ("WuChao".equals(userId)){
                 continue;
             }
             UserObject.deleteUser(userId,accessToken);
-
         }
     }
 }
