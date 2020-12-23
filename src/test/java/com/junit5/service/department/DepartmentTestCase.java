@@ -2,6 +2,7 @@ package com.junit5.service.department;
 
 import com.junit5.service.apiobject.DepartmentObject;
 import com.junit5.service.apiobject.TokenHelper;
+import com.junit5.service.task.DepartmentTask;
 import com.junit5.service.utils.FakerUtils;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
@@ -31,17 +32,10 @@ public class DepartmentTestCase {
         assertEquals(returnCode,createResponse.path("errcode").toString());
     }
 
-//    @BeforeEach
-//    @AfterEach
+    @BeforeEach
+    @AfterEach
     public void clearDepartment(){
-        Response listResponse = DepartmentObject.departmentList("1",accessToken);
-        ArrayList<Integer> departmentList = listResponse.path("department.id");
-        for (int departmentId:departmentList){
-            if (1 == departmentId){
-                continue;
-            }
-            DepartmentObject.deleteDepartment(String.valueOf(departmentId),accessToken);
-        }
+        DepartmentTask.clearDepartmentTask(accessToken);
     }
 
     @DisplayName("修改部门")
@@ -73,6 +67,6 @@ public class DepartmentTestCase {
         Response createResponse = DepartmentObject.createDepartment(createName,createEnName,accessToken);
         String departmentId = createResponse.path("id")!=null ? createResponse.path("id").toString(): null;
         Response listResponse = DepartmentObject.departmentList(departmentId,accessToken);
-        assertEquals("1",listResponse.path("errcode").toString());
+        assertEquals("0",listResponse.path("errcode").toString());
     }
 }

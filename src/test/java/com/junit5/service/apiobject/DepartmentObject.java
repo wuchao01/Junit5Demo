@@ -75,10 +75,8 @@ public class DepartmentObject {
     public static Response deleteDepartment(String parentId, String accessToken) {
         Response deleteResponse = given()
                 .proxy(8888)
-                .body("{\n" +
-                        "   \"id\": " + parentId + ",\n" +
-                        "}")
-                .queryParam("access_token", accessToken)
+                .param("access_token", accessToken)
+                .param("id",parentId)
                 .get("https://qyapi.weixin.qq.com/cgi-bin/department/delete")
                 .then()
                 .log()
