@@ -4,6 +4,9 @@ import com.junit5.service.apiobject.TokenHelper;
 import com.junit5.service.apiobject.UserObject;
 import com.junit5.service.task.UserTask;
 import com.junit5.service.utils.FakerUtils;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Issues;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 

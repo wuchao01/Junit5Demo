@@ -27,7 +27,6 @@ public class DepartmentObject {
      */
     public static Response createDepartment(String departmentName, String departmentEnName, String accessToken){
         Response creatResponse = given()
-                .proxy(8888)
                 .contentType("application/json")
                 .body("{\n" +
                         "   \"name\": \"" + departmentName + "\",\n" +
@@ -51,7 +50,6 @@ public class DepartmentObject {
      */
     public static Response updateDepartment(String departmentName, String departmentEnName, String parentId, String accessToken) {
         Response updateResponse = given()
-                .proxy(8888)
                 .contentType("application/json")
                 .body("{\n" +
                         "   \"id\": " + parentId + ",\n" +
@@ -74,7 +72,6 @@ public class DepartmentObject {
      */
     public static Response deleteDepartment(String parentId, String accessToken) {
         Response deleteResponse = given()
-                .proxy(8888)
                 .param("access_token", accessToken)
                 .param("id",parentId)
                 .get("https://qyapi.weixin.qq.com/cgi-bin/department/delete")
@@ -92,7 +89,6 @@ public class DepartmentObject {
      */
     public static Response departmentList(String parentId,String accessToken){
         Response listResponse = given()
-                .proxy(8888)
                 .param("access_token", accessToken)
                 .param("id",parentId)
                 .get("https://qyapi.weixin.qq.com/cgi-bin/department/list")

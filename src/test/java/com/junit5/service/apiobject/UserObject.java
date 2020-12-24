@@ -12,7 +12,6 @@ public class UserObject {
 
     public static Response createUser(Map<String,String> createBody,String accessToken){
         Response createUserResponse = given()
-                .proxy(8888)
                 .contentType(ContentType.JSON)
                 .body(createBody)
                 .queryParam("access_token",accessToken)
